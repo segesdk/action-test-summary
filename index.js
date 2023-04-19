@@ -457,8 +457,9 @@ function parseJunitXml(xml) {
                 else if (testcase.failure || testcase.error) {
                     status = TestStatus.Fail;
                     details = (testcase.failure || testcase.error)[0]._;
-                    if (testcase.$.message && (testcase.$.message)[0]._) {
-                        detailMessage = (testcase.$.message)[0]._ + "\n\n";
+                    // MAC 2023-04-19 Hyper-conservative "if a message is available"
+                    if (testcase.failure && Array.isArray(testcase.failure) && testcase.failure[0] && testcase.failure[0].$ && testcase.failure[0].$.message) {
+                        detailMessage = testcase.failure[0].$.message + "\n\n";
                     }
                     counts.failed++;
                 }

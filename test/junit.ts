@@ -64,7 +64,7 @@ describe("junit", async () => {
         expect(result.suites[4].cases[0].name).to.eql("Arithmetic Division divides a positive integer by an integer factor ")
         expect(result.suites[4].cases[0].duration).to.eql("10")
         expect(result.suites[4].cases[0].description).to.eql("divides a positive integer by an integer factor ")
-        expect(result.suites[4].cases[0].details!.substring(0, 35)).to.eql("Error: Timeout of 10000ms exceeded.")
+        expect(result.suites[4].cases[0].details!.substring(0, 35)).to.eql("Timeout of 10000ms exceeded. For as")
     })
 
     it("parses junit", async () => {
