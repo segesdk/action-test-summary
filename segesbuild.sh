@@ -6,11 +6,6 @@ npm ci
 npm run test
 ./node_modules/.bin/tsc 
 ./node_modules/.bin/ncc build
-rm -rf dist/
-mkdir dist
-cp action.yml dist/
-cp README.md dist/
-cp LICENSE dist/
-cp bin/* dist/
-rm -rf bin/
-git add -f dist/*
+rm ./*.js
+cp bin/*.js .
+git add -f ./*.js
