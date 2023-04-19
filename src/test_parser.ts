@@ -236,6 +236,7 @@ async function parseJunitXml(xml: any): Promise<TestResult> {
             const duration = testcase.$.time
 
             let details: string | undefined = undefined
+            let detailMessage: string = ""
 
             if (testcase.skipped) {
                 status = TestStatus.Skip
@@ -244,11 +245,16 @@ async function parseJunitXml(xml: any): Promise<TestResult> {
             } else if (testcase.failure || testcase.error) {
                 status = TestStatus.Fail
                 details = (testcase.failure || testcase.error)[0]._
-
+                if (testcase.$.message && (testcase.$.message)[0]._)
+                {
+                    detailMessage = (testcase.$.message)[0]._ + "\n\n"
+                }
                 counts.failed++
             } else {
                 counts.passed++
             }
+
+            details = `${detailMessage}${details}`
             
             cases.push({
                 status: status,

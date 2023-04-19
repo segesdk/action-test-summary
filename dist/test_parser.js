@@ -219,6 +219,7 @@ function parseJunitXml(xml) {
                 const name = testcase.$.name;
                 const duration = testcase.$.time;
                 let details = undefined;
+                let detailMessage = "";
                 if (testcase.skipped) {
                     status = TestStatus.Skip;
                     counts.skipped++;
@@ -226,11 +227,15 @@ function parseJunitXml(xml) {
                 else if (testcase.failure || testcase.error) {
                     status = TestStatus.Fail;
                     details = (testcase.failure || testcase.error)[0]._;
+                    if (testcase.$.message && (testcase.$.message)[0]._) {
+                        detailMessage = (testcase.$.message)[0]._ + "\n\n";
+                    }
                     counts.failed++;
                 }
                 else {
                     counts.passed++;
                 }
+                details = `${detailMessage}${details}`;
                 cases.push({
                     status: status,
                     name: name,
