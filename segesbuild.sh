@@ -7,5 +7,5 @@ npm run test
 ./node_modules/.bin/tsc 
 ./node_modules/.bin/ncc build
 rm ./*.js
-cp bin/*.js .
+cp dist/*.js .
 git add -f ./*.js
